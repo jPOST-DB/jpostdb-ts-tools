@@ -1,0 +1,29 @@
+<script src="//tools.jpostdb.org/assets/js//d3.v3.min.js" charset="utf-8"></script>
+<script src="//tools.jpostdb.org/assets/js/stanza/jpostdb.js" charset="utf-8"></script>
+<script src="//tools.jpostdb.org/assets/js/stanza/jpostdb.protein_browser.js" charset="utf-8"></script>
+
+
+<script src="../assets/js/stanza.js"></script>
+<script>
+  (function() {
+    const descriptor = {"templates":{"stanza.html":"\u003cstyle type=\"text/css\"\u003e\nmain {\n -sebkit-box-shadow: none;\n box-shadow: none;\n}\nsvg#protein_browser_svg {\n    user-select: none;\n    -moz-user-select: none;\n    -webkit-user-select: none;\n    -ms-user-select: none;\n}\ntext.protein_browser_mono {\n    font-size: 14px;\n    font-family: Consolas, 'Courier New', Courier, Monaco, monospace;\n}\ntext.protein_browser_label {\n    font-size: 50px;\n}\nselect.protein_browser_select {\n    height: 30px;\n    font-size: 14px;\n    background-color: #f2f2f2;\n    border: solid #c6c6c6 1px; \n    border-radius: 5px;\n    margin: 20px 0px 20px 0px;\n    padding: 0px 10px 0px 10px;\n    cursor: pointer;\n}\ndiv.view {\n    padding: 0px 0px 0px 0px;\n}\ndiv#draw_area {\n    padding: 0px 0px 0px 0px;\n}\n\u003c/style\u003e\n\u003cdiv id=\"draw_area\"\u003e\u003c/div\u003e\n\n\n"},"parameters":["uniprot","dataset"],"elementName":"togostanza-protein_browser","development":true};
+
+    if ('Promise' in window && 'URLSearchParams' in window && 'fetch' in window) {
+      const Stanza = TogoStanza.initialize(descriptor);
+
+      Stanza(function(stanza, params) {
+
+    stanza.render({
+        template: "stanza.html"
+    });
+
+    jpostdb.protein_browser.init(params, stanza, "#draw_area");
+});
+
+    } else {
+      const element = document.querySelector(descriptor.elementName);
+
+      element.innerHTML = "<p>Your Web browser does not support the features required for the stanza to work. If you are using Internet Explorer 11, placing the following snippet before loading webcomponents-loader.js may resolve this issue:</p>\n<pre><code>&lt;script src=\"https://cdn.jsdelivr.net/combine/npm/@babel/polyfill@7.2.5/dist/polyfill.min.js,npm/@ungap/url-search-params@0.1.2/min.js,npm/whatwg-fetch@3.0.0/dist/fetch.umd.js\" crossorigin&gt;&lt;/script&gt;</code></pre>";
+    }
+  })();
+</script>

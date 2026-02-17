@@ -1,0 +1,35 @@
+<script src="//tools.jpostdb.org/assets/js/d3.v3.min.js" charset="utf-8"></script>
+<script src="//tools.jpostdb.org/assets/js/stanza/jpostdb.js" charset="utf-8"></script>
+<script src="//tools.jpostdb.org/assets/js/stanza/jpostdb.utils.js" charset="utf-8"></script>
+<script src="//tools.jpostdb.org/assets/js/stanza/jpostdb.stat_pie_chart.js" charset="utf-8"></script>
+
+
+<script src="../assets/js/stanza.js"></script>
+<script>
+  (function() {
+    const descriptor = {"templates":{"stanza.html":"\u003cstyle type=\"text/css\"\u003e\nmain {\n -sebkit-box-shadow: none;\n box-shadow: none;\n}\ndiv.view {\n    padding: 0px 0px 0px 0px;\n}\ndiv#draw_area {\n    padding: 0px 0px 0px 0px;\n}\n\u003c/style\u003e\n\u003cdiv id=\"draw_area_{{id}}\"\u003e\u003c/div\u003e\n"},"parameters":["type","species","species_s","sample_type","cell_line","disease","disease_s","organ","modification","instrument"],"elementName":"togostanza-stat_pie_chart","development":true};
+
+    if ('Promise' in window && 'URLSearchParams' in window && 'fetch' in window) {
+      const Stanza = TogoStanza.initialize(descriptor);
+
+      Stanza(function(stanza, params) {
+
+    let id = Math.floor( Math.random() * 10000000 );
+
+    stanza.render({
+        template: "stanza.html",
+        parameters: {
+            id: id
+        }
+    });
+
+    jpostdb.stat_pie_chart.init(params, stanza, "#draw_area_" + id);
+});
+
+    } else {
+      const element = document.querySelector(descriptor.elementName);
+
+      element.innerHTML = "<p>Your Web browser does not support the features required for the stanza to work. If you are using Internet Explorer 11, placing the following snippet before loading webcomponents-loader.js may resolve this issue:</p>\n<pre><code>&lt;script src=\"https://cdn.jsdelivr.net/combine/npm/@babel/polyfill@7.2.5/dist/polyfill.min.js,npm/@ungap/url-search-params@0.1.2/min.js,npm/whatwg-fetch@3.0.0/dist/fetch.umd.js\" crossorigin&gt;&lt;/script&gt;</code></pre>";
+    }
+  })();
+</script>

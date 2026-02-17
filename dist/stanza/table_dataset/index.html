@@ -1,0 +1,52 @@
+
+
+<script src="../assets/js/stanza.js"></script>
+<script>
+  (function() {
+    const descriptor = {"templates":{"stanza.html":"\u003cstyle type=\"text/css\"\u003e\nmain {\n -sebkit-box-shadow: none;\n box-shadow: none;\n}\na {\n    color: #007fb1;\n    text-decoration: none;\n}\na:active, a:hover {\n    color: #007fb1;\n    text-decoration: underline;\n}\ndiv.center {\n  /*  text-align: center; */\n}\ntable.info_table {\n    margin: 0 auto;\n    border-collapse: collapse;\n    font-size: 14px;\n}\ntable.info_table td {\n    padding: 10px 0px 10px 0px;\n    border-bottom: solid 1px #000000;\n}\ntable.info_table td.info_table_label {\n    padding-right: 40px;\n    font-weight: bold;\n}\ntable.sub_info_table{\n    border-collapse: collapse;\n    width: 100%;\n    border-top: solid 1px #000000;\n}\ntable.sub_info_table td{\n    padding: 10px 40px 0px 0px;\n    text-align: left;\n    border: none;\n}\nul.info_table_list {\n    list-style: none;\n    margin: 0px;\n    padding: 0px;\n}\nul.info_table_list li {\n    line-height: 24px;\n    clear: both;\n}\nul.table_style {\n    display: table;\n    margin: 0px;\n}\nli.list_label {\n    display: table-cell;\n    text-align: left;\n    min-width: 200px;\n}\nli.list_value {\n    display: table-cell;\n    text-align: right;\n    min-width: 200px;\n}\na.project_id {\n    min-width: 200px;\n}\n\n\u003c/style\u003e\n\n\u003cdiv id=\"draw_area\" class=\"center\"\u003e\n  \u003ctable class=\"info_table\"\u003e\n    \u003ctr\u003e\n      \u003ctd class=\"info_table_label\"\u003eProject ID\u003c/td\u003e\n      \u003ctd\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003e\u003ca href=\"https://repository.jpostdb.org/entry/{{result.project_id}}\" class=\"project_id\"\u003e{{result.project_id}}\u003c/a\u003e\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.dataset_count}} datasets\u003c/li\u003e\u003c/ul\u003e\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd class=\"info_table_label\"\u003eProject title\u003c/td\u003e\n      \u003ctd\u003e{{result.title}}\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd class=\"info_table_label\"\u003eProject description\u003c/td\u003e\n      \u003ctd\u003e{{result.description}}\u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd class=\"info_table_label\"\u003eSample\u003c/td\u003e\n      \u003ctd\u003e\n\t\u003cul class=\"info_table_list\"\u003e\n\t  \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003especies:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.species}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t  {{#if result.sample_type}}\n\t  \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003esample type:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.sample_type}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t  {{/if}}\n\t  {{#if result.cell_line}}\n\t  \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003ecell line:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.cell_line}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t  {{/if}}\n\t  {{#if result.organ}}\n\t  \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003eorgan:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.organ}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t  {{/if}}\n\t  {{#if result.disease_class}}\n\t  \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003edisease:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.disease_label}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t  {{/if}}\n          {{#if result.fractionation}}\n          \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003efractionation:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.fractionation}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n          {{/if}}\n\t  {{#if result.plex}}\n\t  \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003eplex:\u003c/li\u003e\u003cli class=\"list_value\"\u003e\n\t    \u003ctable class=\"sub_info_table\"\u003e\n\t      {{#each result.plex}}\n\t      \u003ctr\u003e\u003ctd\u003e{{label}}\u003c/td\u003e\u003ctd\u003e{{description}}\u003c/td\u003e\u003c/tr\u003e\n\t      {{/each}}\n\t    \u003c/table\u003e\n\t  \u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t  {{/if}}\t  \n\t\u003c/ul\u003e\n      \u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd class=\"info_table_label\"\u003eStatistics\u003c/td\u003e\n      \u003ctd\u003e\n\t\u003cul class=\"info_table_list\"\u003e\n\t \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003e# proteins:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.prt_count}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003e# peptides:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.pep_count}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t \u003cli\u003e\u003cul class=\"table_style\"\u003e\u003cli class=\"list_label\"\u003e# spectra:\u003c/li\u003e\u003cli class=\"list_value\"\u003e{{result.spc_count}}\u003c/li\u003e\u003c/ul\u003e\u003c/li\u003e\n\t\u003c/ul\u003e\n      \u003c/td\u003e\n    \u003c/tr\u003e\n    \u003ctr\u003e\n      \u003ctd class=\"info_table_label\"\u003eDownload\u003c/td\u003e\n      \u003ctd\u003e\n\t\u003ca href=\"https://tools.jpostdb.org/download/download.php?id={{result.id}}\"\u003e{{result.id}}.tar\u003c/a\u003e\n      \u003c/td\u003e\n    \u003c/tr\u003e\n  \u003c/table\u003e\n\u003c/div\u003e\n"},"parameters":["dataset"],"elementName":"togostanza-table_dataset","development":true};
+
+    if ('Promise' in window && 'URLSearchParams' in window && 'fetch' in window) {
+      const Stanza = TogoStanza.initialize(descriptor);
+
+      Stanza(function(stanza, params) {
+
+    var formBody = [];
+    for (var key in params) {
+	if(params[key]) formBody.push(key + "=" + encodeURIComponent(params[key]));
+    }
+
+    var options = {
+	method: "POST",
+	mode:  "cors",
+	body: formBody.join("&"),
+	headers: {
+	    "Accept": "application/json",	    
+	    'Content-Type': 'application/x-www-form-urlencoded'
+	}
+    };
+
+  let env = "tools";
+  if(location.host.match("db-dev")) env = "db-dev";
+  let api = document.location.protocol + "//" + env + ".jpostdb.org/rest/api/";    
+    var name = "table_items_dataset";
+    
+    var q = fetch(api + name, options).then(res => res.json());
+
+    q.then(function(data){
+	stanza.render({
+	    template: "stanza.html",
+	    parameters: {
+		result: data
+	    }
+	});
+    });
+});
+
+
+    } else {
+      const element = document.querySelector(descriptor.elementName);
+
+      element.innerHTML = "<p>Your Web browser does not support the features required for the stanza to work. If you are using Internet Explorer 11, placing the following snippet before loading webcomponents-loader.js may resolve this issue:</p>\n<pre><code>&lt;script src=\"https://cdn.jsdelivr.net/combine/npm/@babel/polyfill@7.2.5/dist/polyfill.min.js,npm/@ungap/url-search-params@0.1.2/min.js,npm/whatwg-fetch@3.0.0/dist/fetch.umd.js\" crossorigin&gt;&lt;/script&gt;</code></pre>";
+    }
+  })();
+</script>
